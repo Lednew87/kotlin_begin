@@ -1,0 +1,46 @@
+enum class Nivel { JUNIOR, PLENO, SENIOR}
+
+data class Usuario(val nome: String)
+
+data class Conteudo(var nome: String, val duracao: Int, val nivel: Nivel)
+
+val disciplinas = mutableListOf<Conteudo>()
+
+data class Formacao(val nome: String, var conteudos: List<Conteudo>) {
+
+    val inscritos = mutableListOf<Usuario>()
+
+    fun matricular(usuario: Usuario) {
+        inscritos.add(usuario)
+    }
+}
+
+fun main() {
+
+	val junior = Conteudo("Bootcamp PowerBI", 60, Nivel.JUNIOR)
+    val pleno = Conteudo("Bootcamp DataScience", 90, Nivel.PLENO)
+    val senior = Conteudo("Bootcamp Machine Learning", 120, Nivel.SENIOR)
+
+    disciplinas.add(junior)
+    disciplinas.add(pleno)
+    disciplinas.add(senior)
+
+    val curso = Formacao("Cientista de Dados", disciplinas)
+
+    var aluno1 = Usuario("Nicolas Souza")
+    var aluno2 = Usuario("Raul Souza")
+    var aluno3 = Usuario("Wendel Tonzar")
+
+    curso.matricular(aluno1)
+    curso.matricular(aluno2)
+    curso.matricular(aluno3)
+
+    val nome = curso.nome
+    val cont = curso.conteudos 
+    val insc = curso.inscritos
+
+    println("Nome do Curso: $nome")
+    println("Conteúdos do Curso: $cont")
+    println("Inscritos para o Curso: $insc")
+    println("Conteúdo com maior carga horária: $senior")  
+}
